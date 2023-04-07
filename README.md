@@ -1,12 +1,12 @@
 ```sh
-npm i @abasb75/copy-to-clipbord
+npm i @abasb75/copy-to-clipboard
 ```
 
 
 It's work very simple:
 
 ```javascript
-import copy from '@abasb75/copy-to-clipbord';
+import copy from '@abasb75/copy-to-clipboard';
 
 copy(
    'my text for copy', // required
