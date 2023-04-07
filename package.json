@@ -1,0 +1,35 @@
+{
+  "name": "@abasb75/copy-to-clipboard",
+  "version": "0.0.1",
+  "description": "a tools for copy to clipboard",
+  "main": "index.js",
+  "keywords": [
+    "copy",
+    "copy to clipbord",
+    "copy to clipboard",
+    "clipboard",
+    "component",
+    "react-component",
+    "react"
+  ],
+  "author": "Abbas Bagheri <abasbagheria@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "typescript": "^5.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abasb75/copy-to-clipboard/raction.git"
+    },
+    "bugs": {
+    "url": "https://github.com/abasb75/copy-to-clipboard/issues"
+    },
+    "homepage": "https://github.com/abasb75/copy-to-clipboard#readme",
+    "scripts": {
+      "clean": "rm -rf dist",
+      "build": "npm run clean && tsc && cp package.json README.md ./dist" 
+    } 
+      
+    
+}
