@@ -1,54 +1,33 @@
 // @ts-nocheck
+import modernCopy from "./modernCopy";
+import msCopy from "./msCopy";
+import domCopy from "./domCopy";
+import copyToClipboard from "./copyToClipboard";
 
-export default function copy(text:string,success:Function|null=null,error:Function|null=null){
-    if (navigator && navigator.clipboard ) {
-        navigator.clipboard.writeText(text).then(
-            ()=>{
-                if(success){
-                    success();
-                }
-            }
-        ).catch(
-            (err)=>{
-                if(error){
-                    error(err);
-                }
-            }
-        );
+function copy(text:string):Promise;
+function copy(text:string,success:Function|null):null;
+function copy(text:string,success:Function|null=null,error:Function|null=null):null;
+function copy(text:string,success:Function|null=null,error:Function|null=null):Promise|null{
+    if(success || error){
+        copyToClipboard(text,success,error);
+        return null;
     }
-    else if(window && window.clipboardData !== undefined) {
-        window.clipboardData.setData("Text", text);
-        if(success){
-            success();
+    return new Promise((resolve,reject)=>{
+        try{
+           modernCopy(text,resolve,reject);
+        }catch(err){
+            try{
+                msCopy(text);
+                resolve();
+            }catch(err){
+                try{
+                    domCopy(text,resolve,reject);
+                }catch(err){
+                    reject(err);
+                }
+            }
         }
-    }
-    else {
-        fallbackCopyTextToClipboard(text,success,error);
-        if(success) { success(); }
-    }
-
+    });
 }
 
-function fallbackCopyTextToClipboard(text:string,success:Function|null=null,error:Function|null=null) {
-    var textArea = document.createElement("textarea");
-    textArea.value = text;
-    textArea.style.top = "0";
-    textArea.style.left = "0";
-    textArea.style.position = "fixed";
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-
-    try {
-        document.execCommand('copy');
-        if(success){ 
-            success(); 
-        }
-    } catch (err) {
-        if(error){
-            error(err);
-        }
-    }
-  
-    document.body.removeChild(textArea);
-  }
+export default copy;
