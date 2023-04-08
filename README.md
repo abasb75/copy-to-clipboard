@@ -31,7 +31,7 @@ copy(
 
 ```
 
-if you don'n need succuss or failure functions :
+if you don'nt need succuss or failure functions :
 
 ```javascript
 import copy from '@abasb75/copy-to-clipboard';
@@ -39,3 +39,7 @@ import copy from '@abasb75/copy-to-clipboard';
 copy('some text ... ');
 
 ```
+
+
+
+<p><a href="https://www.npmjs.com/package/@abasb75/copy-to-clipboard/v/0.0.2">older version with smaller size (2.61kb)</a></p>
