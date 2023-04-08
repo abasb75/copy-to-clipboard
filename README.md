@@ -31,7 +31,7 @@ copy(
 
 ```
 
-if you don'nt need succuss or failure functions :
+if you don't need succuss or failure functions :
 
 ```javascript
 import copy from '@abasb75/copy-to-clipboard';
