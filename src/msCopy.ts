@@ -1,9 +1,11 @@
-function msCopy(text:string,success:Function|null=null,error:Function|null=null) {
+import { CopyMethod } from "./types";
+
+const msCopy:CopyMethod = (text,successCallback,failureCallback) => {
     (<any>window).clipboardData.setData("Text", text);
-    if(success){
-        success();
-    }else if(error){
-        error('window.clipboardData is not supported on browser!');
+    if(successCallback){
+        successCallback();
+    }else if(failureCallback){
+        failureCallback('window.clipboardData is not supported on browser!');
     }
     
 }
