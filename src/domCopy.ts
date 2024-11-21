@@ -1,6 +1,6 @@
-// @ts-nocheck
+import { CopyMethod } from "./types";
 
-function domCopy(text:string,success:Function|null=null,error:Function|null=null) {
+const domCopy:CopyMethod = (text,successCallback,failureCallback) => {
     var textArea = document.createElement("textarea");
     textArea.value = text;
     textArea.style.top = "0";
@@ -11,13 +11,13 @@ function domCopy(text:string,success:Function|null=null,error:Function|null=null
     textArea.select();
     try {
         document.execCommand('copy');
-        if (success) {
-            success();
+        if (successCallback) {
+            successCallback();
         }
     }
     catch (err) {
-        if (error) {
-            error(err);
+        if (failureCallback) {
+            failureCallback(err);
         }
     }
     document.body.removeChild(textArea);

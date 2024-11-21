@@ -1,27 +1,25 @@
-// @ts-nocheck
+
 import modernCopy from "./modernCopy";
 import msCopy from "./msCopy";
 import domCopy from "./domCopy";
 import copyToClipboard from "./copyToClipboard";
+import { CopyMethod } from "./types";
 
-function copy(text:string):Promise;
-function copy(text:string,success:Function|null):null;
-function copy(text:string,success:Function|null=null,error:Function|null=null):null;
-function copy(text:string,success:Function|null=null,error:Function|null=null):Promise|null{
-    if(success || error){
-        copyToClipboard(text,success,error);
-        return null;
+const copy:CopyMethod = (text,succussCallback,failureCallback):Promise<string>|void=>{
+    if(succussCallback || failureCallback){
+        copyToClipboard(text,succussCallback,failureCallback);
+        return;
     }
-    return new Promise((resolve,reject)=>{
+    return new Promise<string>((resolve,reject)=>{
         try{
            modernCopy(text,resolve,reject);
         }catch(err){
             try{
                 msCopy(text);
-                resolve();
+                resolve('copied');
             }catch(err){
                 try{
-                    domCopy(text,resolve,reject);
+                    domCopy(text,()=>resolve('copied'),reject);
                 }catch(err){
                     reject(err);
                 }

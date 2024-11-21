@@ -1,7 +1,5 @@
-// @ts-nocheck
-
 function msCopy(text:string,success:Function|null=null,error:Function|null=null) {
-    window.clipboardData.setData("Text", text);
+    (<any>window).clipboardData.setData("Text", text);
     if(success){
         success();
     }else if(error){
