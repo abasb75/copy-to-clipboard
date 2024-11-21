@@ -1,16 +1,16 @@
-// @ts-nocheck
+import { CopyMethod } from "./types";
 
-function modernCopy(text:string,success:Function|null=null,error:Function|null=null) {
+const modernCopy:CopyMethod = (text,successCallback,failureCallback) => {
     navigator.clipboard.writeText(text).then(
         ()=>{
-            if(success){
-                success();
+            if(successCallback){
+                successCallback();
             }
         }
     ).catch(
         err=>{
-            if(error){
-                error(err);
+            if(failureCallback){
+                failureCallback(err);
             }
         }
     );

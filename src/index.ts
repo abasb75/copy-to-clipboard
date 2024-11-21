@@ -12,7 +12,7 @@ const copy:CopyMethod = (text,succussCallback,failureCallback):Promise<string>|v
     }
     return new Promise<string>((resolve,reject)=>{
         try{
-           modernCopy(text,resolve,reject);
+           modernCopy(text,()=>resolve('copied'),reject);
         }catch(err){
             try{
                 msCopy(text);
